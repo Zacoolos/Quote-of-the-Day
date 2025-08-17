@@ -13,17 +13,26 @@ Start a port: 'python3 -m http.server 8080' and go to it's URL
   <title>Tailwind Example</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-black text-white">
+<body class="bg-black text-wh">
 
-  <h1 class="text-center text-4xl font-bold mt-10">
-    My First CSS Example
-  </h1>
+  <div class="bg-gray-800 bg-opacity-60 w-screen h-16 flex items-center justify-center mt-10">
+    <h1 class="text-center text-4xl font-bold bg-gradient-to-tr from-blue-400 via-purple-300 bg-clip-text text-transparent">
+      - Quote of the Day! -
+    </h1>
+  </div>
 
-  <p class="font-sans text-[20px] text-center mt-4">
-    This is a paragraph.
-  </p>
 
-  <img src="Files/Augustus_Image.png" class="w-400 h-550 mx-auto mt-4" alt="Augustus Image" />
+
+<p class="font-sans text-[20px] text-center mt-4 bg-gradient-to-tr from-orange-900 via-yellow-300 to-white bg-clip-text text-transparent">
+  "Make haste slowly" - Augustus<br>
+</p>
+
+
+<h2 class="font-sans text-[20px] text-center mt-4 >
+  {Quotes.QuoteFinder()}
+</h2>
+
+  <img src="Files/Augustus_Image.png" class="w-[500px] h-[690px] float-right mt-4" alt="Augustus Image" />
 
 </body>
 </html>
