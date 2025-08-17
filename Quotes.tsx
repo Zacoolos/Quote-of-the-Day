@@ -1,5 +1,6 @@
 // App.tsx
 import React, { useEffect, useState } from "react";
+import ReactDOM from 'react-dom;'
 
 type Quote = {
   q: string;
