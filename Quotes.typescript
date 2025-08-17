@@ -17,6 +17,7 @@ const App = () => {
         const response = await fetch("https://zenquotes.io/api/quotes/");
         const data: Quote[] = await response.json();
         setQuote(data[0]); // Get the first quote
+        console.log("Fetched quote:", data[0]);
       } catch (error) {
         console.error("Error fetching quote:", error);
       } finally {
