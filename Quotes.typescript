@@ -1,31 +1,63 @@
-import React, { useEffect } from "react";
-import ReactDOM from "react-dom/client";
+// App.tsx
+import React, { useEffect, useState } from "react";
 
 type Quote = {
   q: string;
   a: string;
 };
-function QuoteFinder() {
-
-  const App = () => {
-    useEffect(() => {
-      const fetchQuotes = async () => {
-        try {
-          const response = await fetch("https://zenquotes.io/api/quotes/");
-          const data: Quote[] = await response.json();
-          console.log(data);
-        } catch (error) {
-          console.error("Error fetching quotes:", error);
-        }
-      };
-
-      fetchQuotes();
-    }, []);
-
-    return <h1>Check the console for Zen Quotes</h1>;
-  };
-}
 
 
-const root = ReactDOM.createRoot(document.getElementById("root")!);
-root.render(<App />);
+const App = () => {
+  const [quote, setQuote] = useState<Quote | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchQuotes = async () => {
+      try {
+        const response = await fetch("https://zenquotes.io/api/quotes/");
+        const data: Quote[] = await response.json();
+        setQuote(data[0]); // Get the first quote
+      } catch (error) {
+        console.error("Error fetching quote:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchQuotes();
+  }, []);
+
+  return (
+    <div className="bg-black text-white min-h-screen p-4">
+      {/* Header */}
+      <div className="bg-gray-800 bg-opacity-60 w-full h-16 flex items-center justify-center mt-10">
+        <h1 className="text-center text-4xl font-bold bg-gradient-to-tr from-blue-400 via-purple-300 bg-clip-text text-transparent">
+          - Quote of the Day! -
+        </h1>
+      </div>
+
+      {/* Augustus Quote */}
+      <p className="font-sans text-[20px] text-center mt-4 bg-gradient-to-tr from-orange-900 via-yellow-300 to-white bg-clip-text text-transparent">
+        "Make haste slowly" - Augustus
+      </p>
+
+      {/* API Quote */}
+      <h2 className="font-sans text-[20px] text-center mt-4 bg-gradient-to-tr from-amber-700 via-yellow-300 to-white bg-clip-text text-transparent">
+        {loading
+          ? "Loading quote..."
+          : quote
+          ? `"${quote.q}" - ${quote.a}`
+          : "Failed to load quote"}
+      </h2>
+
+      {/* Image */}
+      <img
+        src="Files/Augustus_Image.png"
+        className="w-[500px] h-[690px] float-right mt-4"
+        alt="Augustus Image"
+      />
+    </div>
+  );
+};
+
+export default App;
